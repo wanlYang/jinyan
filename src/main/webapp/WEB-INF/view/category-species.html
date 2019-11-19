@@ -35,15 +35,6 @@
                 <p>TEACHER TEAM</p>
 			</div>
 			<ul class="video" id="training"> 
-                <li th:each="danceTraining,stat:${allDanceTraining}">
-                    <a th:href="@{/training/detail/} + ${danceTraining.id}">
-                        <div class="video-text" style = "text-align:center;">
-                            <p class="fs20" th:text="${danceTraining.danceName}"></p>
-                            <p class="fs12">金彦TOP SHOW</p>
-                        </div>
-                        <img th:src="@{${danceTraining.danceImg}}" alt="">
-                    </a>
-                </li>
             </ul>
             <div class="pages">
                 <div id="speciespage"></div>

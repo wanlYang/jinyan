@@ -35,37 +35,79 @@
 				<h6>视频集锦</h6>
 				<p>TEACHER TEAM</p>
             </div>
-            <ul class="video" th:if="${not #lists.isEmpty(videos)}"> 
-                <li th:each="video,stat:${videos}">
-                    <a th:href="@{/video/detail/} + ${video.id}">
-                        <i>
-                            <div class="video-text">
-                                <p class="fs20" th:text="${video.title}"></p>
-                                <p class="fs12">金彦TOP SHOW</p>
-                            </div>
-                        </i>
-                        <img th:src="@{${video.video_img}}" alt="">
-                    </a>
-                </li>
+            <ul class="video" id="videos"> 
             </ul>
             <div class="pages">
-                <span><a href="">1</a></span>
-                <span><a href="">2</a></span>
-                <span><a href="">3</a></span>
-                <span><a href="">4</a></span>
-                <span><a href="">5</a></span>
-                <span><a href="">6</a></span>
-                <span><a href="">7</a></span>
-                <span><a href="">8</a></span>
-                <span><a href="">9</a></span>
-                <span><a href="">10</a></span>
-                <span><a href="">11</a></span>
-                <span><a href="">12</a></span>
-                <span><a href="">13</a></span>
-                <span><a href="">14</a></span>
-                <span><a href="">15</a></span>
+                <div id="videopage"></div>
             </div>
         </div>
+        <script type="text/javascript">
+		layui.use(['form', 'layer', 'jquery','laypage'], function () {
+			var form = layui.form,
+	        layer = parent.layer === undefined ? layui.layer : top.layer,
+	    	$ = layui.jquery,
+	    	laypage = layui.laypage;
+			var current_page = null,index,count;
+			$.ajax({
+	            url: getRealPath() +"/video/count",
+	            type: 'GET',
+	            async:false,
+	            success: function (data) {
+	            	count = data.count;
+	            },
+	            error: function () {
+	                layer.msg("出现错误,请尝试刷新页面!");
+	            }
+	        });
+			laypage.render({
+				elem : 'videopage',
+				count : count, //数据总数,
+				limit:2,
+				jump : function(obj,first) {
+				    $.ajax({
+			            url: getRealPath() + "/video/page",
+			            type: 'POST',
+			            data: {'curr':obj.curr,'limit':obj.limit},
+			            beforeSend:function(){
+			            	index = top.layer.msg('请求中,请稍候', {
+			                    icon: 16,
+			                    time: false,
+			                    shade: 0.8
+			                });
+			            },
+			            complete: function (XMLHttpRequest, textStatus) {
+			            	layer.close(index);
+			            },
+			            success: function (data) {
+			                if (data.status == 200 && data.data != null && data.data.length != 0) {
+			                	var videosHtml = "";
+			                	$.each(data.data,function(i,item){
+			                		videosHtml += "<li>";
+			                		videosHtml += '<a href="'+getRealPath()+"/video/detail/"+item.id+'">';
+			                		videosHtml += '<i>';
+			                		videosHtml += '<div class="video-text" style = "text-align:center;">';
+			                		videosHtml += '<p class="fs20">'+item.title+'</p>';
+			                		videosHtml += '<p class="fs12">金彦TOP SHOW</p>';
+			                		videosHtml += '</div>';
+			                		videosHtml += '</i>';
+			                		videosHtml += '<img src="'+item.video_img+'" alt="">';
+			                		videosHtml += '</a>';
+			                		videosHtml += '</li>';
+			                		
+			                	})
+			                	$("#videos").html(videosHtml);
+			                } else {
+			                	layer.msg(data.message);
+			                }
+			            },
+			            error: function () {
+			                layer.msg("出现错误,请尝试刷新页面!");
+			            }
+			        });
+				}
+			});
+		})
+		</script>
         <!-- 页脚 footer -->
 		<div class="footer">
             <div th:replace="commons/foot::foot"></div>

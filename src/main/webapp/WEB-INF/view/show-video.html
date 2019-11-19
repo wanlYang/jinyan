@@ -32,9 +32,9 @@
                 <video th:poster="@{${video.video_img}}" th:src="@{${video.local}}" data-ckin="default" data-overlay="1" th:attr="data-title=${video.title}"></video>
             </div>
             <div class="page">
-                <p><a href="">上一页</a></p>
-                <p><a th:href="@{/vts}">返回栏目</a></p>
-                <p><a href="">下一页</a></p>
+            <p style="display: block;margin: 0 auto;width: 200px;height: 50px;">
+                <a th:href="@{/vts}" >返回栏目</a>
+                </p>
             </div>
         </div>
         

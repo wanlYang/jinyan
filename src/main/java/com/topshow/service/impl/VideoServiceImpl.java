@@ -77,6 +77,16 @@ public class VideoServiceImpl implements VideoService{
 		String a = "http://video.jytopshow.com/asdasd";
 		System.out.println(a.substring(27));
 	}
+
+	@Override
+	public List<Video> getAllVideo(Integer curr, Integer limit) {
+		List<Video> videos = null;
+        if (curr != null && limit != null) {
+        	videos = this.videoMapper.findAllVideoByPage(
+                    Integer.valueOf((curr.intValue() - 1) * limit.intValue()), limit);
+        }
+        return (videos != null) ? videos : null;
+	}
 	
 
 }

@@ -145,13 +145,44 @@ public class ViewController {
     	result.setMessage("获取成功!");
         return result;
     }
+    
+    /**
+     * 视频集锦分页数据
+     * @param curr
+     * @param limit
+     * @return
+     */
+    @RequestMapping(value = "/video/page",method = RequestMethod.POST)
+    @ResponseBody
+    public Result videoPage(Integer curr,Integer limit) {
+    	Result result = new Result();
+    	List<Video> videos = videoService.getAllVideo(curr,limit);
+    	result.setStatus(200);
+    	result.setData(videos);
+    	result.setCount(videoService.getAllVideoCount());
+    	result.setMessage("获取成功!");
+        return result;
+    }
+    
+    /**
+     * 视频数量
+     * @return
+     */
+    @RequestMapping(value = "/video/count",method = RequestMethod.GET)
+    @ResponseBody
+    public Result videoCount() {
+    	Result result = new Result();
+    	result.setStatus(200);
+    	result.setData(null);
+    	result.setCount(videoService.getAllVideoCount());
+    	result.setMessage("获取成功!");
+        return result;
+    }
     /**
      * 跳转视频集锦页面
      */
     @RequestMapping(value = "/vts",method = RequestMethod.GET)
     public ModelAndView videoHighlights(ModelAndView modelAndView) {
-    	List<Video> list = videoService.getAllVideo();
-    	modelAndView.addObject("videos",list);
     	modelAndView.setViewName("category-video");
         return modelAndView;
     }

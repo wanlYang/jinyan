@@ -16,6 +16,9 @@
     <select id="findCount" resultType="int">
     	SELECT COUNT(*) FROM `video`;
     </select>
+    <select id="findAllVideoByPage" resultMap="videoResultMap">
+    	SELECT * FROM `video` LIMIT #{start},#{limit}
+    </select>
     <insert id="create" parameterType="Video">
     	INSERT INTO `video`(local,video_img,title) VALUES(#{local},#{video_img},#{title});
     </insert>

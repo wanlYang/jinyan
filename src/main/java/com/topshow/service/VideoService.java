@@ -16,6 +16,8 @@ public interface VideoService {
 	Result addVideo(Video video);
 
 	Integer del(String id);
+
+	List<Video> getAllVideo(Integer curr, Integer limit);
 	
 	
 
