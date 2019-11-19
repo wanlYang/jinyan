@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.topshow.mapper.AboutMapper">
+   <!--  <select id="getAbout" resultMap="aboutResultMap">
+    	SELECT * FROM `about`
+    </select> -->
+    <resultMap type="About" id="aboutResultMap">
+    	<id column="id" property="id"></id>
+    	<result column="content" property="content"/>
+    </resultMap>
+    <select id="getAbout" resultMap="aboutResultMap">
+    	SELECT * FROM `about` WHERE id = #{id};
+    </select>
+    <update id="update" parameterType="About">
+    	UPDATE `about`
+        <set>
+            <if test="content != null">`content`=#{content}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+</mapper>

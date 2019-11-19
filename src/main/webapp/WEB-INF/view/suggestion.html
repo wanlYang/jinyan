@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>意见反馈</title>
+		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<div th:replace="commons/link::head('')"></div>
+		<script th:src="@{/static/js/jquery.min.js}"></script>
+	</head>
+	<body>
+		<div class="head">
+			<div th:replace="commons/top::top('意见反馈')"></div>
+    	</div>
+    <script>
+    $(function(){
+        var _width = $(window).width();
+        if(_width < 750){
+            document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/laoshi.jpg\">";
+        }else{
+            document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/son-ban03.jpg\">";
+        }
+    }); 	
+    </script>
+    <div class="banner" id="banner"></div>
+    <div class="opinion-form">
+      <div class="title">
+          <h6>意见反馈</h6>
+          <p>TEACHER TEAM</p>
+      </div>
+      <form class="layui-form layui-form-pane" method="post" th:action="@{/suggestion/submit}">
+          <div class="ftitle">
+              <label class="ib left">您的姓名：</label>
+              <input class="right input username" type="text" placeholder="请输入您的姓名" name="username" >
+          </div>
+          <div class="ftitle">
+              <label class="ib left">手机号码：</label>
+              <input class="right input phone" type="text" placeholder="请输入您的手机号码" name="phone">
+          </div>
+          <div class="ftitle">
+              <label class="ib left">建议内容：</label>
+              <textarea  class="right textarea content" name="content" id=""  rows="8" placeholder="请说出您的意见，我们会虚心接受并立即改正"></textarea>
+          </div>
+          <div class="button">
+              <button class="submit ba-color">提交建议</button>
+          </div>
+      </form>
+    </div>
+	
+
+    <!-- 页脚 footer -->
+    <div class="footer">
+     <div th:replace="commons/foot::foot"></div>
+    </div>
+    <div th:replace="commons/script::script('/static/js/index.js')"></div>
+    <script type="text/javascript" th:inline="javascript">
+		layui.use(['layer'],function(){
+			var layer = layui.layer;
+			var message = [[${message}]];
+			if(message != null && message != ''){
+				layer.msg(message);
+				setTimeout(function() {
+					location.href=getRealPath() + "/suggestion";	
+				}, 500);
+			}
+		})
+	</script>
+  </body>
+</html>

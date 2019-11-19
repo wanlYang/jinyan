@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>企业新闻</title>
+		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<div th:replace="commons/link::head('')"></div>
+		<script th:src="@{/static/js/jquery.min.js}"></script>
+	</head>
+	<body>
+        <!-- 头部导航 -->
+		<div class="head">
+			<div th:replace="commons/top::top('企业新闻')"></div>
+        </div>
+        <!-- 栏目顶图 -->
+        <script>
+        $(function(){
+            var _width = $(window).width();
+            if(_width < 750){
+                document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/laoshi.jpg\">";
+            }else{
+                document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/son-ban03.jpg\">";
+            }
+        });
+        </script>
+        <div class="banner" id="banner"></div>
+        <div class="category-news">
+					<div class="news-left">
+						<!-- 栏目title -->
+						<div class="title">
+								<h6>企业新闻</h6>
+								<p>Company Profile</p>
+						</div>
+						<ul class="news-left-ul" th:if="${not #lists.isEmpty(news)}">
+							<li th:each="news,stat:${news}">
+									<a  target="_blank" th:href="@{/news/detail/} + ${news.id}">
+											<div class="left news-img">
+													<img th:src="@{${news.img}}" alt="" width="100%">
+											</div>
+											<div class="right news-text">
+													<h3 class="title-overflow" th:text="${news.title}">游戏手机都不值得买</h3>
+													<p class="text-overflow" th:text="${news.content}">这次邀请函的主题是「Gather round」，中文文案译作「又该团聚了」，爱范儿猜测，这可能意味着将发布一整套「全家桶」新品。而其中的金色圆环形似 Apple Park 的主建筑，这种金色或将是苹果产品的新配色。</p>
+													<div class="news-mate">
+															<span class="left time" th:text="${#dates.format(news.release_time,'yyyy-MM-dd HH:mm:ss')}">2018-09-01</span>
+															<span class="right star" th:text="${news.browse_volume}">1</span>
+													</div>
+											</div>
+									</a>
+							</li>
+						</ul>
+					</div>
+					<!-- 新闻推荐 -->
+					<div class="news-right">
+							<h3>最新资讯</h3>
+							<!-- 新闻推荐内容 -->
+							<ul class="right-ul"  th:if="${not #lists.isEmpty(news)}">
+								<li th:each="news_t,stat:${news}">
+									<a th:href="@{/news/detail/} + ${news_t.id}" target="_blank">
+										<p class="news-title title-overflow left" th:text="${news_t.title}">游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买</p>
+										<p class="news-time right" th:text="${#dates.format(news_t.release_time,'yyyy-MM-dd')}">2018-09-01</p>
+									</a>
+								</li>
+							</ul>
+							<!-- 翻页 -->
+							<div class="page">
+									<p class="left"><a href="" target="_blank">上一页</a></p>
+									<p class="left"><a href="" target="_blank">返回栏目</a></p>
+									<p class="left"><a href="" target="_blank">下一页</a></p>
+							</div>
+					</div>
+			</div>
+<!-- 页脚 footer -->
+<div class="footer">
+		<div th:replace="commons/foot::foot"></div>
+</div>
+<div th:replace="commons/script::script('/static/js/index.js')"></div>
+</body>
+</html>

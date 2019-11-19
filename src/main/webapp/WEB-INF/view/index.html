@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+		<script th:inline="javascript">
+				if (/mobile/i.test(navigator.userAgent)) {
+					var context = [[@{/}]];
+					window.location = context + 'wap'
+				}
+		</script>
+	<head>
+		<meta charset="UTF-8">
+		<title>金彦舞蹈TOPSHOW</title>
+		<div th:replace="commons/link::head('')"></div>
+		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<script th:src="@{/static/js/jquery.min.js}"></script>
+	</head>
+	<body>
+		<div class="head">
+			<div th:replace="commons/top::top('首页')"></div>
+		</div>
+		<div class="banner">
+			<div class="slider">
+				<ul class="slides" th:if="${not #lists.isEmpty(banners)}">
+					<li class="slide" th:each="banner,stat:${banners}">
+						<img th:src="@{${banner.imgLocal}}">
+					</li>
+				</ul>
+			</div>
+		</div>	
+		<div class="teachers">
+			<div class="title">
+				<h6>舞蹈培训师资团队</h6>
+				<p>TEACHER TEAM</p>
+			</div>
+			<div th:if="${not #lists.isEmpty(danceTeachers)}">
+				<ul class="clearfix">
+				<li th:each="danceTeacher,stat:${danceTeachers}">
+					<a th:href="@{/teacher/detail/} + ${danceTeacher.id}">
+						<div class="fl">
+							<h6><span th:text="${danceTeacher.international} + '舞老师_'"></span><span th:text="${danceTeacher.name}"></span></h6>
+							<div class="datum">
+								<p><strong>毕业学院：</strong></p>
+								<p th:text="${danceTeacher.graduateSchool}">北京舞蹈学院</p>
+							</div>
+							<div class="datum">
+								<p><strong>教学范围：</strong></p>
+								<p th:text="${danceTeacher.teachingScope}">国标拉丁舞，芭蕾舞，中国舞考级，风情拉丁舞(Salsa)，古典舞，民族民间舞，形体礼仪。</p>
+							</div>
+						</div>
+						<div class="fr">
+							<img th:src="@{${danceTeacher.img}}" alt="">
+						</div>
+					</a>
+				</li>
+			</ul>
+			</div>
+			<div th:if="${#lists.isEmpty(danceTeachers)}" style="width: 1200px;margin: 0 auto;text-align: center;font-size: 22px;">
+				暂无数据
+			</div>
+			<div class="mt10">
+				<a th:href="@{/teacher}">舞蹈老师详见>></a>
+			</div>
+		</div>
+		<div class="species">
+			<div class="title">
+				<h6>培训项目</h6>
+				<p>TEACHER TEAM</p>
+			</div>
+			<div th:if="${not #lists.isEmpty(danceTrainings)}">
+				<ul class="clearfix">
+				<li th:each="danceTraining,stat:${danceTrainings}">
+					<a th:href="@{/training/detail/} + ${danceTraining.id}">
+						<img th:src="@{${danceTraining.danceImg}}" alt="">
+					</a>
+					<h6><a href="" th:text="${danceTraining.danceName}"></a><span th:text="${danceTraining.englishName}">Ballet Dance</span>	</h6>
+				</li>
+			</ul>
+			</div>
+			<div th:if="${#lists.isEmpty(danceTrainings)}" style="width: 1200px;margin: 0 auto;text-align: center;font-size: 22px;">
+				暂无数据
+			</div>
+			<div class="mt10">
+				<a th:href="@{/species}">舞蹈培训班详见>></a>
+			</div>
+		</div>
+		<div class="news">
+			<div class="news-con">
+				<div class="fl list">
+					<div class="megwh">
+						<img th:src="@{/static/img/news-bg.png}" alt="">
+						<p>
+							<span class="one">最新信息</span>
+							<span class="two">NEWS</span>
+						</p>
+					</div>
+					<ul class="tabulation" th:if="${not #lists.isEmpty(news_t)}">
+						<li th:each="news_t,stat:${news_t}">
+							<a class="fl" th:href="@{/news/detail/} + ${news_t.id}" ><span th:text="${news_t.title}"></span></a>
+							<span class="fr" th:text="${#dates.format(news_t.release_time,'yyyy-MM-dd')}">2018-06-19</span>
+						</li>
+					</ul>
+					<div class="more">
+						<a th:href="@{/topnews}">
+							更多信息
+						</a>
+					</div>
+				</div>
+				<div class="fr news-tab">
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">金华路店</a></li>
+						<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">丰禾路店</a></li>
+						<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">高新店</a></li>
+					</ul>
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane fade in active" id="home">
+							<a href="cources.html">
+								<img th:src="@{/static/img/kebiao.png}" alt="" width="100%">
+							</a>
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="profile">
+							<a href="cources.html">
+								<img th:src="@{/static/img/kebiao.png}" alt="" width="100%">
+							</a>
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="messages">
+							<a href="cources.html">
+								<img th:src="@{/static/img/kebiao.png}" alt="" width="100%">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 页脚 footer -->
+		<div class="footer">
+			<div th:replace="commons/foot::foot"></div>
+		</div>
+		<div th:replace="commons/script::script('/static/js/index.js')"></div>
+		<script type="text/javascript">
+			var glide = $('.slider').glide({
+				//autoplay:true,//是否自动播放 默认值 true如果不需要就设置此值
+				//动画过度效果，只有当浏览器支持CSS3的时候生效
+				animationTime:500, 
+				//是否显示左右导航器
+				arrows:true, 
+				//滑块箭头导航器外部DIV类名
+				arrowsWrapperClass: "arrowsWrapper",
+				//滑块箭头公共类名
+				arrowMainClass: "slider-arrow",
+				//滑块右箭头类名
+				arrowRightClass:"slider-arrow--right",
+				//滑块左箭头类名
+				arrowLeftClass:"slider-arrow--left",
+				//定义左右导航器文字或者符号也可以是类
+				arrowRightText:"",							
+				//主导航器也就是本例中显示的小方块
+				arrowLeftText:"",
+				nav:true,
+				//主导航器位置是否居中
+				navCenter:true,
+				//主导航器外部div类名
+				navClass:"slider-nav",
+				//本例中小方块的样式
+				navItemClass:"slider-nav__item",
+				//被选中后的样式
+				navCurrentItemClass:"slider-nav__item--current" 
+			});	
+		</script>
+	</body>
+</html>

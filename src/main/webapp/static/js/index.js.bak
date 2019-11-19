@@ -1,0 +1,28 @@
+if($(window).width()<=768){
+    $('a').each(function(){
+        $(this).attr('target', '');
+    });
+    /*页脚手机端js*/
+    $('.news-div-p').click( function(){
+        $(this).next().slideToggle(500).siblings('.news-ul').slideUp();
+    })
+        
+    document.writeln("<div class=\'wap-footer\'></div>");
+    document.writeln("    <div class=\'wap-fixed\' >");
+    document.writeln("        <div class=\'tel left\'>");
+    document.writeln("            <a href=\'tel:18149416013\'>");
+    document.writeln("                <img src=\'images/wap-tel.png\' alt=\'\'>");
+    document.writeln("                <p>热线电话</p>");
+    document.writeln("            </a>");
+    document.writeln("        </div>");
+    document.writeln("        <div class=\'word left\'>");
+    document.writeln("            <a href=\'tel:18149416013\'>");
+    document.writeln("                <img src=\'images/wap-word.png\' alt=\'\'>");
+    document.writeln("                <p>在线留言</p>");
+    document.writeln("            </a>");
+    document.writeln("        </div>");
+    document.writeln("    </div>");
+
+}else{
+    $('a').each(function(){ $(this).attr('target', '_blank'); });
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.topshow.mapper.DanceTrainingMapper">
+    <select id="findAllDanceTraining" resultMap="danceTrainingResultMap">
+    	SELECT * FROM `dance_training`
+    </select>
+    <resultMap type="DanceTraining" id="danceTrainingResultMap">
+    	<id column="id" property="id"></id>
+    	<result column="dancename" property="danceName"/>
+    	<result column="danceimg" property="danceImg"/>
+    	<result column="dancedetail" property="danceDetail"/>
+    	<result column="englishname" property="englishName"/>
+    </resultMap>
+    <select id="findAllDanceTrainingByPage" resultMap="danceTrainingResultMap">
+    	SELECT * FROM `dance_training` LIMIT #{start},#{limit}
+    </select>
+    <select id="getTrainingCount" resultType="int">
+    	SELECT COUNT(*) FROM `dance_training`
+    </select>
+    <insert id="creatTraining" parameterType="DanceTraining">
+    	INSERT INTO `dance_training`(id,`dancename`,danceimg,dancedetail,englishname) 
+    	VALUES(#{id},#{danceName},#{danceImg},#{danceDetail},#{englishName})
+    </insert>
+    <update id="updateTraining" parameterType="DanceTraining">
+    	UPDATE `dance_training`
+        <set>
+            <if test="danceName != null">`dancename`=#{danceName},</if>
+            <if test="danceImg != null">danceimg=#{danceImg},</if>
+            <if test="danceDetail != null">dancedetail=#{danceDetail},</if>
+            <if test="englishName != null">englishname=#{englishName}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <select id="getTrainingById" resultMap="danceTrainingResultMap">
+    	SELECT * FROM `dance_training` WHERE id = #{id};
+    </select>
+    <delete id="deleteTraining">
+    	DELETE FROM `dance_training` WHERE id = #{id};
+    </delete>
+</mapper>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:if="${news != null}">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${news.title}"></title>
+		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<div th:replace="commons/link::head('')"></div>
+		<script th:src="@{/static/js/jquery.min.js}"></script>
+	</head>
+	<body>
+		<div class="head">
+			<div th:replace="commons/top::top('企业新闻')"></div>
+    	</div>
+    <script>
+    $(function(){
+        var _width = $(window).width();
+        if(_width < 750){
+            document.getElementById("banner").innerHTML = "<img src=\" " +getRealPath()+ "/static/img/laoshi.jpg\">";
+        }else{
+            document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/son-ban03.jpg\">";
+        }
+    });
+    </script>
+    <div class="banner" id="banner"></div>
+
+    <!-- 新闻内容 -->
+    <div class="category-news">
+      <div class="news-left">
+          <!-- 栏目title -->
+						<div class="title">
+              <h6>新闻详情</h6>
+              <p>Company Profile</p>
+          </div>
+          <div class="show-news">
+              <h4 th:text="${news.title}"></h4>
+              <p class="show-news-time">
+                  <span class="data" th:text="${#dates.format(news.release_time,'yyyy-MM-dd HH:mm:ss')}"></span>
+                  <span class="star" th:text="${news.browse_volume}"></span>
+              </p>
+              <img th:src="@{${news.img}}" style="max-width:80%;margin:50px auto;display: block;" alt="">
+              <p class="show-news-con" th:text="${news.content}">
+
+              </p>
+          </div>
+      </div>
+      <!-- 新闻推荐 -->
+      <div class="news-right">
+          <!-- 栏目title -->
+          <h3>最新资讯</h3>
+          <!-- 新闻推荐内容 -->
+          <ul class="right-ul" th:if="${not #lists.isEmpty(news_t)}">
+              <li th:each="news_t,stat:${news_t}">
+				<a th:href="@{/news/detail/} + ${news_t.id}" target="_blank">
+					<p class="news-title title-overflow left" th:text="${news_t.title}">游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买</p>
+					<p class="news-time right" th:text="${#dates.format(news_t.release_time,'yyyy-MM-dd')}">2018-09-01</p>
+				</a>
+			</li>
+          </ul>
+          <!-- 翻页 -->
+          <div class="page">
+            <p class="left"><a href="" target="_blank">上一页</a></p>
+            <p class="left"><a href="" target="_blank">返回栏目</a></p>
+            <p class="left"><a href="" target="_blank">下一页</a></p>
+          </div>
+      </div>
+    </div>
+
+     <!-- 页脚 footer -->
+		<div class="footer">
+   <div th:replace="commons/foot::foot"></div>
+  </div>
+  <div th:replace="commons/script::script('/static/js/index.js')"></div>
+</body>
+</html>
+

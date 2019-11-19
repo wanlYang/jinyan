@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.topshow.mapper.BannerMapper">
+    <select id="findAllBanner" resultMap="BannerResultMap">
+    	SELECT * FROM `banner`
+    </select>
+    <resultMap type="Banner" id="BannerResultMap">
+    	<id column="id" property="id"></id>
+    	<result column="imglocal" property="imgLocal"/>
+    </resultMap>
+    <select id="findAllBannerCount" resultType="int">
+    	SELECT COUNT(*) FROM `banner`;
+    </select>
+    <insert id="create" parameterType="Banner">
+    	INSERT INTO `banner`(imglocal) VALUES(#{imgLocal});
+    </insert>
+    <delete id="del" parameterType="int">
+    	DELETE FROM `banner` WHERE id = #{id};
+    </delete>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.topshow.mapper.SuggestionMapper">
+   <!--  <select id="getAbout" resultMap="aboutResultMap">
+    	SELECT * FROM `about`
+    </select> -->
+    <resultMap type="Suggestion" id="suggestionResultMap">
+    	<id column="id" property="id"></id>
+    	<result column="content" property="content"/>
+    	<result column="username" property="username"/>
+    	<result column="phone" property="phone"/>
+    </resultMap>
+    <!-- <select id="getAbout" resultMap="aboutResultMap">
+    	SELECT * FROM `about` WHERE id = #{id};
+    </select>
+    <update id="update" parameterType="About">
+    	UPDATE `about`
+        <set>
+            <if test="content != null">`content`=#{content}</if>
+        </set>
+        WHERE id=#{id}
+    </update>  -->
+    <insert id="create" parameterType="Suggestion">
+    	INSERT INTO `suggestion`(username,phone,content) VALUES(#{username},#{phone},#{content})
+    </insert>
+    <select id="findAllSuggestionByPage" resultMap="suggestionResultMap">
+    	SELECT * FROM `suggestion` LIMIT #{start},#{limit};
+    </select>
+    <select id="findCount" resultType="Integer">
+    	SELECT COUNT(*) FROM `suggestion`;
+    </select>
+    <delete id="delete">
+    	DELETE FROM `suggestion` WHERE id = #{id};
+    </delete>
+</mapper>

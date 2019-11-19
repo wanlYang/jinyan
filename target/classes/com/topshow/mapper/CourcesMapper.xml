@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.topshow.mapper.CourcesMapper">
+    <select id="findAll" resultMap="CourcesResultMap">
+    	SELECT * FROM `cources`
+    </select>
+    <resultMap type="Cources" id="CourcesResultMap">
+    	<id column="id" property="id"></id>
+    	<result column="tableimg" property="tableImg"/>
+    </resultMap>
+    <select id="findAllCount" resultType="int">
+    	SELECT COUNT(*) FROM `cources`;
+    </select>
+    <insert id="create" parameterType="Banner">
+    	INSERT INTO `cources`(tableimg) VALUES(#{tableImg});
+    </insert>
+    <delete id="del" parameterType="String">
+    	DELETE FROM `cources` WHERE id = #{id};
+    </delete>
+</mapper>

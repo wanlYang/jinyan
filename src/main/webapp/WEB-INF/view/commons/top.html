@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 顶部导航栏 -->
+    <div class="navbar navbar-default" role="navigation" th:fragment="top(nav)">
+		<div class="container-fluid clearfix"> 
+			<div class="navbar-header ">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+					<span class="sr-only">切换导航</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><img th:src="@{/static/img/logo.png}" alt=""></a>
+			</div>
+			<div class="collapse navbar-collapse " id="example-navbar-collapse">
+				<ul class="nav navbar-nav" th:if="${nav} == '培训项目'" >
+						<li><a th:href="@{/}">首页</a></li>
+						<li><a th:href="@{/teacher}">金彦导师</a></li>
+						<li><a th:href="@{/vts}">视频集锦</a></li>
+						<li><a th:href="@{/cources}">金彦课程</a></li>
+						<li><a th:href="@{/topnews}">企业新闻</a></li>
+						<li><a th:href="@{/about}">关于我们</a></li>
+						<li><a th:href="@{/suggestion}">意见反馈</a></li>
+						<li><a th:href="@{/contact}">联系金彦</a></li>
+				</ul>
+				<ul class="nav navbar-nav" th:if="${nav} == '首页'" >
+						<li class="active"><a th:href="@{/}">首页</a></li>
+						<li><a th:href="@{/teacher}">金彦导师</a></li>
+						<li><a th:href="@{/vts}">视频集锦</a></li>
+						<li><a th:href="@{/cources}">金彦课程</a></li>
+						<li><a th:href="@{/topnews}">企业新闻</a></li>
+						<li><a th:href="@{/about}">关于我们</a></li>
+						<li><a th:href="@{/suggestion}">意见反馈</a></li>
+						<li><a th:href="@{/contact}">联系金彦</a></li>
+				</ul>
+				<ul class="nav navbar-nav" th:if="${nav} == '金彦导师'" >
+						<li><a th:href="@{/}">首页</a></li>
+						<li class="active"><a th:href="@{/teacher}">金彦导师</a></li>
+						<li><a th:href="@{/vts}">视频集锦</a></li>
+						<li><a th:href="@{/cources}">金彦课程</a></li>
+						<li><a th:href="@{/topnews}">企业新闻</a></li>
+						<li><a th:href="@{/about}">关于我们</a></li>
+						<li><a th:href="@{/suggestion}">意见反馈</a></li>
+						<li><a th:href="@{/contact}">联系金彦</a></li>
+				</ul>
+				<ul class="nav navbar-nav" th:if="${nav} == '视频集锦'" >
+						<li><a th:href="@{/}">首页</a></li>
+						<li><a th:href="@{/teacher}">金彦导师</a></li>
+						<li  class="active"><a th:href="@{/vts}">视频集锦</a></li>
+						<li><a th:href="@{/cources}">金彦课程</a></li>
+						<li><a th:href="@{/topnews}">企业新闻</a></li>
+						<li><a th:href="@{/about}">关于我们</a></li>
+						<li><a th:href="@{/suggestion}">意见反馈</a></li>
+						<li><a th:href="@{/contact}">联系金彦</a></li>
+				</ul>
+				<ul class="nav navbar-nav" th:if="${nav} == '金彦课程'" >
+						<li><a th:href="@{/}">首页</a></li>
+						<li><a th:href="@{/teacher}">金彦导师</a></li>
+						<li><a th:href="@{/vts}">视频集锦</a></li>
+						<li  class="active"><a th:href="@{/cources}">金彦课程</a></li>
+						<li><a th:href="@{/topnews}">企业新闻</a></li>
+						<li><a th:href="@{/about}">关于我们</a></li>
+						<li><a th:href="@{/suggestion}">意见反馈</a></li>
+						<li><a th:href="@{/contact}">联系金彦</a></li>
+				</ul>
+				<ul class="nav navbar-nav" th:if="${nav} == '企业新闻'" >
+						<li><a th:href="@{/}">首页</a></li>
+						<li><a th:href="@{/teacher}">金彦导师</a></li>
+						<li><a th:href="@{/vts}">视频集锦</a></li>
+						<li><a th:href="@{/cources}">金彦课程</a></li>
+						<li class="active"><a th:href="@{/topnews}">企业新闻</a></li>
+						<li><a th:href="@{/about}">关于我们</a></li>
+						<li><a th:href="@{/suggestion}">意见反馈</a></li>
+						<li><a th:href="@{/contact}">联系金彦</a></li>
+				</ul>
+				<ul class="nav navbar-nav" th:if="${nav} == '关于我们'" >
+						<li><a th:href="@{/}">首页</a></li>
+						<li><a th:href="@{/teacher}">金彦导师</a></li>
+						<li><a th:href="@{/vts}">视频集锦</a></li>
+						<li><a th:href="@{/cources}">金彦课程</a></li>
+						<li><a th:href="@{/topnews}">企业新闻</a></li>
+						<li class="active"><a th:href="@{/about}">关于我们</a></li>
+						<li><a th:href="@{/suggestion}">意见反馈</a></li>
+						<li><a th:href="@{/contact}">联系金彦</a></li>
+				</ul>
+				<ul class="nav navbar-nav" th:if="${nav} == '联系金彦'" >
+						<li><a th:href="@{/}">首页</a></li>
+						<li><a th:href="@{/teacher}">金彦导师</a></li>
+						<li><a th:href="@{/vts}">视频集锦</a></li>
+						<li><a th:href="@{/cources}">金彦课程</a></li>
+						<li><a th:href="@{/topnews}">企业新闻</a></li>
+						<li><a th:href="@{/about}">关于我们</a></li>
+						<li ><a th:href="@{/suggestion}">意见反馈</a></li>
+						<li class="active"><a th:href="@{/contact}">联系金彦</a></li>
+				</ul>
+				<ul class="nav navbar-nav" th:if="${nav} == '意见反馈'" >
+						<li><a th:href="@{/}">首页</a></li>
+						<li><a th:href="@{/teacher}">金彦导师</a></li>
+						<li><a th:href="@{/vts}">视频集锦</a></li>
+						<li><a th:href="@{/cources}">金彦课程</a></li>
+						<li><a th:href="@{/topnews}">企业新闻</a></li>
+						<li><a th:href="@{/about}">关于我们</a></li>
+						<li  class="active"><a th:href="@{/suggestion}">意见反馈</a></li>
+						<li><a th:href="@{/contact}">联系金彦</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</html>

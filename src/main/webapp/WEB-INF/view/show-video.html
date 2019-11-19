@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:if="${video!=null}">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${video.title}"></title>
+		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+        <div th:replace="commons/link::head('')"></div>
+        <link rel="stylesheet" th:href="@{/static/css/ckin.min.css}">
+		<script th:src="@{/static/js/jquery.min.js}"></script>
+	</head>
+	<body>
+		<div class="head">
+			<div th:replace="commons/top::top('视频集锦')"></div>
+        </div>
+        <script>
+        $(function(){
+            var _width = $(window).width();
+            if(_width < 750){
+                document.getElementById("banner").innerHTML = "<img src=\" " +getRealPath()+ "/static/img/laoshi.jpg\">";
+            }else{
+                document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/son-ban03.jpg\">";
+            }
+        });
+        </script>
+        <div class="banner" id="banner"></div>
+        <div class="show-video">
+            <div class="title">
+                <h6>视频集锦</h6>
+                <p>TEACHER TEAM</p>
+            </div>
+            <div class="container">
+                <video th:poster="@{${video.video_img}}" th:src="@{${video.local}}" data-ckin="default" data-overlay="1" th:attr="data-title=${video.title}"></video>
+            </div>
+            <div class="page">
+                <p><a href="">上一页</a></p>
+                <p><a th:href="@{/vts}">返回栏目</a></p>
+                <p><a href="">下一页</a></p>
+            </div>
+        </div>
+        
+
+
+        <!-- 页脚 footer -->
+		<div class="footer">
+               <div th:replace="commons/foot::foot"></div>
+            </div>
+            <script type="text/javascript" th:src="@{/static/js/ckin.min.js}"></script>
+            <div th:replace="commons/script::script('/static/js/index.js')"></div>
+        </body>
+    </html>

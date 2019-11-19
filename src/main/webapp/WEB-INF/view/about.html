@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>关于我们</title>
+		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<div th:replace="commons/link::head('')"></div>
+		<script th:src="@{/static/js/jquery.min.js}"></script>
+	</head>
+	<body>
+        <!-- 头部导航 -->
+		<div class="head">
+			<div th:replace="commons/top::top('关于我们')"></div>
+        </div>
+        <!-- 栏目顶图 -->
+        <script>
+        $(function(){
+            var _width = $(window).width();
+            if(_width < 750){
+                document.getElementById("banner").innerHTML = "<img src=\" " +getRealPath()+ "/static/img/laoshi.jpg\">";
+            }else{
+                document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/son-ban03.jpg\">";
+            }
+        });
+        </script>
+        <div class="banner" id="banner"></div>
+        <!-- 页面内容 -->
+        <div class="about">
+            <div class="title">
+				<h6>公司简介</h6>
+				<p>Company Profile</p>
+            </div>
+            <div class="about-cen" th:if="${about!=null and about.content != null}">
+                <p class="fs20" th:text="${about.content}"></p>
+                <!-- <div class="images">
+                    <p class="img-center"><img th:src="@{static/img/1514874753813042.jpg}" alt=""></p>
+                    <p class="img-center"><img th:src="@{static/img/1514874753813042.jpg}" alt=""></p>
+                    <p class="img-center"><img th:src="@{static/img/1514874753813042.jpg}" alt=""></p>
+                    <p class="img-center"><img th:src="@{static/img/1514874753813042.jpg}" alt=""></p>
+                    <p class="img-center"><img th:src="@{static/img/1514874753813042.jpg}" alt=""></p>
+                    <p class="img-center"><img th:src="@{static/img/1514874753813042.jpg}" alt=""></p>
+                    <p class="img-center"><img th:src="@{static/img/1514874753813042.jpg}" alt=""></p>
+                    <p class="img-center"><img th:src="@{static/img/1514874753813042.jpg}" alt=""></p>
+                    <p class="img-center"><img th:src="@{static/img/1514874753813042.jpg}" alt=""></p>
+                    <p class="img-center"><img th:src="@{static/img/1514874753813042.jpg}" alt=""></p>
+                </div> -->
+            </div>
+        </div>
+        <!-- 页脚 footer -->
+		<div class="footer">
+            <div th:replace="commons/foot::foot"></div>
+        </div>
+        <div th:replace="commons/script::script('/static/js/index.js')"></div>
+    </body>
+</html>

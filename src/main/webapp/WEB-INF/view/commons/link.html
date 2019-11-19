@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div th:fragment="head(cssPaths)">
+		<div th:if="${_csrf} != null">
+			<meta name="_csrf" th:content="${_csrf.token}"/>
+			<meta name="_csrf_header"  th:content="${_csrf.headerName}"/>
+		</div>
+		<style>
+			.layui-layer-dialog .layui-layer-content .layui-layer-ico16{ background-size:100% 100% !important; }
+			.genre-box a{
+				color: #fff;
+				cursor: pointer;
+			}
+			.genre-box a:hover {
+				color: #b37c7e;
+			}
+			#indexcar{
+				height: 450px;
+			}
+			.con-box:after{
+				content: "";
+				display: block;
+				clear: both;
+			}
+			.slice {
+				position: relative;
+				float: left;
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				background: #00000059;
+			}
+			.slice > div {
+				position: absolute;
+				margin: 1em auto;
+				left: 50%;
+				top: 50%;
+				margin-left: -12.5px;
+				margin-top: -12.5px;
+			}
+		</style>
+		
+		<link rel="stylesheet" th:href="@{/admin/static/layui/css/layui.css}" media="all" />
+		<script type="text/javascript" th:src="@{/admin/static/layui/layui.js}"></script>
+		<script type="text/javascript" th:src="@{/admin/static/js/utils.js}"></script>
+		<link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" media="all" />
+		<link rel="stylesheet" th:href="@{/static/css/jinyan.css}" media="all" />
+		<link rel="stylesheet" th:each="cssPath,status:${#strings.setSplit(cssPaths,',')}" th:href="@{${cssPath}}" media="all" />
+	</div>
+</html>

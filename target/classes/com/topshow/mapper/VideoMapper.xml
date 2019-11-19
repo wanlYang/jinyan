@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.topshow.mapper.VideoMapper">
+    <select id="findAll" resultMap="videoResultMap">
+    	SELECT * FROM `video`
+    </select>
+    <resultMap type="Video" id="videoResultMap">
+    	<id column="id" property="id"></id>
+    	<result column="local" property="local"/>
+    	<result column="title" property="title"/>
+    	<result column="video_img" property="video_img"/>
+    </resultMap>
+    <select id="findById" resultMap="videoResultMap">
+    	SELECT * FROM `video` WHERE id = #{id};
+    </select>
+    <select id="findCount" resultType="int">
+    	SELECT COUNT(*) FROM `video`;
+    </select>
+    <insert id="create" parameterType="Video">
+    	INSERT INTO `video`(local,video_img,title) VALUES(#{local},#{video_img},#{title});
+    </insert>
+    <delete id="del" parameterType="String">
+    	DELETE FROM `video` WHERE id = #{id};
+    </delete>
+</mapper>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:if="${danceTraining!=null}">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${danceTraining.danceName}"></title>
+		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<div th:replace="commons/link::head('')"></div>
+		<script th:src="@{/static/js/jquery.min.js}"></script>
+	</head>
+	<body>
+		<div class="head">
+			<div th:replace="commons/top::top('培训项目')"></div>
+        </div>
+        <script>
+	        $(function(){
+	            var _width = $(window).width();
+	            if(_width < 750){
+	                document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/laoshi.jpg\">";
+	            }else{
+	                document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/son-ban03.jpg\">";
+	            }
+	        });
+        </script>
+        <div class="banner" id="banner"></div>
+        <div class="show-teacher">
+            <div class="title">
+                <h6 th:text="${danceTraining.danceName}">爵士舞</h6>
+                <p th:text="${danceTraining.englishName}">TEACHER TEAM</p>
+            </div>
+            <div class="teacher-entry">
+                <div class="img">
+                    <img th:src="@{${danceTraining.danceImg}}" alt="" width="100%">
+                </div>
+                <hr>
+                <div class="content">
+                    <div class="datum">
+                        <p th:text="${danceTraining.danceDetail}">深圳龙华领尚专业舞蹈培训学校是国际流行舞蹈指定培训机构，影视艺术专业培训基地，也是国际职业认证唯一指定的培训机构，我们培养了一批又一批专业的舞蹈人才，其中不少学员已成为专业舞蹈演员，有的致力于舞蹈教练工作，有的更是投身到舞蹈事业的发展之路。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 页脚 footer -->
+		<div class="footer">
+           <div th:replace="commons/foot::foot"></div>
+        </div>
+        <div th:replace="commons/script::script('/static/js/index.js')"></div>
+    </body>
+</html>

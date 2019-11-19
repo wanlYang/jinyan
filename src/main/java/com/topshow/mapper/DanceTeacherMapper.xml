@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.topshow.mapper.DanceTeacherMapper">
+    <select id="findAllDanceTeacher" resultMap="danceTeacherResultMap">
+    	SELECT * FROM `dance_teacher`
+    </select>
+    <resultMap type="DanceTeacher" id="danceTeacherResultMap">
+    	<id column="id" property="id"></id>
+    	<result column="name" property="name"/>
+    	<result column="graduate_school" property="graduateSchool"/>
+    	<result column="teaching_qualification" property="teachingQualification"/>
+    	<result column="teaching_scope" property="teachingScope"/>
+    	<result column="describe" property="describe"/>
+    	<result column="age" property="age"/>
+    	<result column="international" property="international"/>
+    	<result column="img" property="img"/>
+    </resultMap>
+    <select id="findAllTeacherListByPageAndKey" resultMap="danceTeacherResultMap">
+   		SELECT * FROM `dance_teacher`
+   		<where>
+            <if test="arg2.keyWord != null and arg2.keyType == 'teacher_id'">
+                AND id like CONCAT('%','${arg2.keyWord}','%')
+            </if>
+            <if test="arg2.keyWord != null and arg2.keyType == 'teacher_name'">
+                AND name like CONCAT('%','${arg2.keyWord}','%')
+            </if>
+            <if test="arg2.keyWord != null and arg2.keyType == 'teacher_graduate'">
+                AND graduate_school like CONCAT('%','${arg2.keyWord}','%')
+            </if>
+            <if test="arg2.keyWord != null and arg2.keyType == 'teacher_international'">
+                AND international like CONCAT('%','${arg2.keyWord}','%')
+            </if>
+        </where>
+        LIMIT #{start},#{limit}
+    </select>
+    <select id="findAllTeacherListByPage" resultMap="danceTeacherResultMap">
+    	SELECT * FROM `dance_teacher` LIMIT #{start},#{limit};
+    </select>
+    <select id="getTeacherCountByParam" resultType="int" parameterType="TeacherQueryParam">
+    	SELECT COUNT(*) FROM `dance_teacher`
+   		<where>
+            <if test="keyWord != null and keyType == 'teacher_id'">
+                AND id like CONCAT('%','${arg2.keyWord}','%')
+            </if>
+            <if test="keyWord != null and keyType == 'teacher_name'">
+                AND name like CONCAT('%','${arg2.keyWord}','%')
+            </if>
+            <if test="keyWord != null and keyType == 'teacher_graduate'">
+                AND graduate_school like CONCAT('%','${arg2.keyWord}','%')
+            </if>
+            <if test="keyWord != null and keyType == 'teacher_international'">
+                AND international like CONCAT('%','${arg2.keyWord}','%')
+            </if>
+        </where>
+    </select>
+    <select id="getAllCount" resultType="int">
+    	SELECT COUNT(*) FROM `dance_teacher`
+    </select>
+    <insert id="creatTeacher" parameterType="DanceTeacher">
+    	INSERT INTO `dance_teacher`(id,`name`,graduate_school,teaching_qualification,teaching_scope,`describe`,age,international,img) 
+    	VALUES(#{id},#{name},#{graduateSchool},#{teachingQualification},#{teachingScope},#{describe},#{age},#{international},#{img})
+    </insert>
+    <update id="updateTeacher" parameterType="DanceTeacher">
+    	UPDATE `dance_teacher`
+        <set>
+            <if test="name != null">`name`=#{name},</if>
+            <if test="graduateSchool != null">graduate_school=#{graduateSchool},</if>
+            <if test="teachingQualification != null">teaching_qualification=#{teachingQualification},</if>
+            <if test="teachingScope != null">teaching_scope=#{teachingScope},</if>
+            <if test="describe != null">`describe`=#{describe},</if>
+            <if test="age != null">age=#{age},</if>
+            <if test="international != null">international=#{international},</if>
+            <if test="img != null">img=#{img}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteTeacher" parameterType="String">
+    	DELETE FROM `dance_teacher` WHERE id = #{id};
+    </delete>
+    <select id="getTeacherById" parameterType="String" resultMap="danceTeacherResultMap">
+    	SELECT * FROM `dance_teacher` WHERE id = #{id};
+    </select>
+</mapper>

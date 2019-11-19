@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>金彦导师</title>
+		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<div th:replace="commons/link::head('')"></div>
+		<script th:src="@{/static/js/jquery.min.js}"></script>
+	</head>
+	<body>
+		<div class="head">
+			<div th:replace="commons/top::top('金彦导师')"></div>
+        </div>
+        <script>
+        $(function(){
+            var _width = $(window).width();
+            if(_width < 750){
+                document.getElementById("banner").innerHTML = "<img src=\" " +getRealPath()+ "/static/img/laoshi.jpg\">";
+            }else{
+                document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/son-ban03.jpg\">";
+            }
+        });
+        </script>
+        <div class="banner" id="banner"></div>
+        <div class="teacher">
+            <div class="title">
+                <h6>师资力量</h6>
+                <p>TEACHER TEAM</p>
+            </div>
+            <ul class="teacher-entry" id="teacherCon">
+            </ul>
+            <div class="pages">
+				<div id="teacherpage"></div>
+            </div>
+        </div>
+		
+		<!-- 页脚 footer -->
+		<div class="footer">
+           <div th:replace="commons/foot::foot"></div>
+        </div>
+        <script type="text/javascript">
+		layui.use(['form', 'layer', 'jquery','laypage'], function () {
+			var form = layui.form,
+	        layer = parent.layer === undefined ? layui.layer : top.layer,
+	    	$ = layui.jquery,
+	    	laypage = layui.laypage;
+			var current_page = null,index,count;
+			$.ajax({
+	            url: getRealPath() +"/teacher/count",
+	            type: 'GET',
+	            async:false,
+	            success: function (data) {
+	            	count = data.count;
+	            },
+	            error: function () {
+	                layer.msg("出现错误,请尝试刷新页面!");
+	            }
+	        });
+			laypage.render({
+				elem : 'teacherpage',
+				count : count, //数据总数,
+				limit:2,
+				jump : function(obj,first) {
+				    $.ajax({
+			            url: getRealPath() + "/teacher/page",
+			            type: 'POST',
+			            data: {'curr':obj.curr,'limit':obj.limit},
+			            beforeSend:function(){
+			            	index = top.layer.msg('请求中,请稍候', {
+			                    icon: 16,
+			                    time: false,
+			                    shade: 0.8
+			                });
+			            },
+			            complete: function (XMLHttpRequest, textStatus) {
+			            	layer.close(index);
+			            },
+			            success: function (data) {
+			                if (data.status == 200 && data.data != null && data.data.length != 0) {
+			                	var teacherHtml = "";
+			                	$.each(data.data,function(i,item){
+			                		teacherHtml += "<li>";
+			                		teacherHtml += "<div class='fl'>";
+			                		teacherHtml += "<img src='"+getRealPath()+item.img+"'  alt=''>";
+			                		teacherHtml += "</div>";
+			                		teacherHtml += "<div class='fr'>";
+			                		teacherHtml += '<h6>任课老师：<span>'+item.name+'</span></h6>';
+			                		teacherHtml += '<div class="datum">';
+			                		teacherHtml += '<p><strong >毕业学院：</strong></p>';
+			                		teacherHtml += '<p>'+item.graduateSchool+'</p>';
+			                		teacherHtml += '</div>';
+			                		teacherHtml += '<div class="datum">';
+			                		teacherHtml += '<p><strong >教学资质：</strong></p>';
+			                		teacherHtml += '<p>'+item.teachingQualification+'</p>';
+			                		teacherHtml += '</div>';
+			                		teacherHtml += '<div class="datum">';
+			                		teacherHtml += '<p><strong >教学范围：</strong></p>';
+			                		teacherHtml += '<p>'+item.teachingScope+'</p>';
+			                		teacherHtml += '</div>';
+			                		teacherHtml += '</div>';
+			                		teacherHtml += "</li>";
+			                	})
+			                	$("#teacherCon").html(teacherHtml);
+			                } else {
+			                	layer.msg(data.message);
+			                }
+			            },
+			            error: function () {
+			                layer.msg("出现错误,请尝试刷新页面!");
+			            }
+			        });
+				}
+			});
+		})
+		</script>
+        <div th:replace="commons/script::script('/static/js/index.js')"></div>
+    </body>
+</html>

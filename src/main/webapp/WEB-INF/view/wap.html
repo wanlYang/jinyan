@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+    <script th:inline="javascript">
+		</script>
+		<meta charset="UTF-8">
+		<title>金彦舞蹈</title>
+		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <div th:replace="commons/link::head('')"></div>
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+    <style>
+      .wap .wap-teachers,.wap .wap-species {padding:20px 0;}
+      .wap .wap-teachers ul{padding:20px 0;font-size:0;}
+      .wap .wap-teachers ul li{width:48%;margin:0 1% 10px 1%;display:inline-block;position: relative;border-radius:10px;overflow: hidden;}
+      .wap .wap-teachers ul li p{width: 100%;margin: 0;line-height:20px;position: absolute;left: 0;bottom: 0;font-weight: 100;background: url(img/tm.png) repeat left top;font-size:12px;padding-left:12px;}
+      .wap .wap-species .clearfix{padding:20px 0;}
+      .wap .wap-species .clearfix li{width:96%;margin:0 auto 10px auto;position: relative;border-radius:10px;overflow: hidden;}
+      .wap .wap-species .clearfix li p{width: 100%;margin: 0;line-height:30px;position: absolute;left: 0;bottom: 0;font-weight: 100;background:url(img/tm.png) repeat left top;font-size:12px;padding-left:14px;}
+    </style>
+	</head>
+	<body>
+		<div class="head">
+			<div th:replace="commons/top::top('首页')"></div>
+		</div>
+		<div class="banner">
+			<div class="slider">
+				<ul class="slides">
+					<li class="slide" th:each="banner,stat:${banners}">
+						<img th:src="@{${banner.imgLocal}}">
+					</li>
+				</ul>
+			</div>
+    </div>	
+    <div class="wap">
+      <div class="wap-teachers">
+        <div class="title">
+          <h6>舞蹈培训师资团队</h6>
+          <p>TEACHER TEAM</p>
+        </div>
+        <ul>
+          <li th:each="danceTeacher,stat:${danceTeachers}">
+			<a th:href="@{/teacher/detail/} + ${danceTeacher.id}">
+				<p  th:text="${danceTeacher.international} + '舞老师_' + ${danceTeacher.name}"></p>
+				<img th:src="@{${danceTeacher.img}}" alt="" width="100%">
+			</a>
+          </li>
+        </ul>
+        <div class="mt10">
+          <a  th:href="@{/teacher}">查看更多舞蹈老师</a>
+        </div>
+      </div>
+      <div class="wap-species">
+        <div class="title">
+          <h6>舞种项目培训</h6>
+          <p>TEACHER TEAM</p>
+        </div>
+        <ul class="clearfix">
+			<a th:each="danceTraining,stat:${danceTrainings}" th:href="@{/training/detail/} + ${danceTraining.id}">
+				<li>
+					<img th:src="@{${danceTraining.danceImg}}" alt="" width="100%">
+					<p th:text="${danceTraining.danceName}"><span th:text="${danceTraining.englishName}">Ballet Dance</span></p>
+				</li>
+			</a>
+        </ul>
+      </div>
+    </div>
+    <!-- 页脚 footer -->
+		<div class="footer">
+			<div th:replace="commons/foot::foot"></div>
+		</div>
+		<div th:replace="commons/script::script('/static/js/index.js')"></div>
+		<script type="text/javascript">
+			var glide = $('.slider').glide({
+				//autoplay:true,//是否自动播放 默认值 true如果不需要就设置此值
+				//动画过度效果，只有当浏览器支持CSS3的时候生效
+				animationTime:500, 
+				//是否显示左右导航器
+				arrows:true, 
+				//滑块箭头导航器外部DIV类名
+				arrowsWrapperClass: "arrowsWrapper",
+				//滑块箭头公共类名
+				arrowMainClass: "slider-arrow",
+				//滑块右箭头类名
+				arrowRightClass:"slider-arrow--right",
+				//滑块左箭头类名
+				arrowLeftClass:"slider-arrow--left",
+				//定义左右导航器文字或者符号也可以是类
+				arrowRightText:"",							
+				//主导航器也就是本例中显示的小方块
+				arrowLeftText:"",
+				nav:true,
+				//主导航器位置是否居中
+				navCenter:true,
+				//主导航器外部div类名
+				navClass:"slider-nav",
+				//本例中小方块的样式
+				navItemClass:"slider-nav__item",
+				//被选中后的样式
+				navCurrentItemClass:"slider-nav__item--current" 
+			});	
+		</script>
+	</body>
+</html>

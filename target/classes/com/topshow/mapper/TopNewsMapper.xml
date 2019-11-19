@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.topshow.mapper.TopNewsMapper">
+    <select id="getAllNews" resultMap="newsResultMap">
+    	SELECT * FROM `news`
+    </select>
+    <resultMap type="News" id="newsResultMap">
+    	<id column="id" property="id"></id>
+    	<result column="title" property="title"/>
+    	<result column="img" property="img"/>
+    	<result column="release_time" property="release_time"/>
+    	<result column="browse_volume" property="browse_volume"/>
+    	<result column="content" property="content"/>
+    </resultMap>
+    <select id="findAllNewsByPage" resultMap="newsResultMap">
+    	SELECT * FROM `news` LIMIT #{start},#{limit}
+    </select>
+    <select id="findCount" resultType="int">
+    	SELECT COUNT(*) FROM `news`;
+    </select>
+    <insert id="create" parameterType="News">
+    	INSERT INTO `news`(title,img,release_time,browse_volume,content) VALUES(#{title},#{img},#{release_time},#{browse_volume},#{content});
+    </insert>
+   	<select id="findNewsById" resultMap="newsResultMap">
+    	SELECT * FROM `news` WHERE id = #{id};
+    </select>
+     <update id="update" parameterType="News">
+     	UPDATE `news`
+        <set>
+            <if test="title != null">`title`=#{title},</if>
+            <if test="img != null">img=#{img},</if>
+            <if test="browse_volume != null">browse_volume=#{browse_volume},</if>
+            <if test="content != null">content=#{content}</if>
+        </set>
+        WHERE id=#{id}
+     </update>
+    <delete id="delete" parameterType="Integer">
+    	DELETE FROM `news` WHERE id = #{id};
+    </delete>
+    <select id="findNews" resultMap="newsResultMap">
+    	SELECT * FROM `news`;
+    </select>
+</mapper>

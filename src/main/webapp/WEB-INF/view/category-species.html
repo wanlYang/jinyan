@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>培训项目</title>
+		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<div th:replace="commons/link::head('')"></div>
+		<script th:src="@{/static/js/jquery.min.js}"></script>
+		<style type="text/css">
+			div ul:after {
+			   content: '';
+			   display: block;
+			   clear: both;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="head">
+			<div th:replace="commons/top::top('培训项目')"></div>
+        </div>
+        <script th:inline="javascript">
+        $(function(){
+            var _width = $(window).width();
+            if(_width < 750){
+                document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/laoshi.jpg\">";
+            }else{
+                document.getElementById("banner").innerHTML = "<img src=\"" +getRealPath()+ "/static/img/son-ban03.jpg\">";
+            }
+        });
+        </script>
+        <div class="banner" id="banner"></div>
+        <div class="teacher category-video">
+            <div class="title">
+                <h6>项目列表</h6>
+                <p>TEACHER TEAM</p>
+			</div>
+			<ul class="video" id="training"> 
+                <li th:each="danceTraining,stat:${allDanceTraining}">
+                    <a th:href="@{/training/detail/} + ${danceTraining.id}">
+                        <div class="video-text" style = "text-align:center;">
+                            <p class="fs20" th:text="${danceTraining.danceName}"></p>
+                            <p class="fs12">金彦TOP SHOW</p>
+                        </div>
+                        <img th:src="@{${danceTraining.danceImg}}" alt="">
+                    </a>
+                </li>
+            </ul>
+            <div class="pages">
+                <div id="speciespage"></div>
+            </div>
+        </div>
+        <script type="text/javascript">
+		layui.use(['form', 'layer', 'jquery','laypage'], function () {
+			var form = layui.form,
+	        layer = parent.layer === undefined ? layui.layer : top.layer,
+	    	$ = layui.jquery,
+	    	laypage = layui.laypage;
+			var current_page = null,index,count;
+			$.ajax({
+	            url: getRealPath() +"/species/count",
+	            type: 'GET',
+	            async:false,
+	            success: function (data) {
+	            	count = data.count;
+	            },
+	            error: function () {
+	                layer.msg("出现错误,请尝试刷新页面!");
+	            }
+	        });
+			laypage.render({
+				elem : 'speciespage',
+				count : count, //数据总数,
+				limit:2,
+				jump : function(obj,first) {
+				    $.ajax({
+			            url: getRealPath() + "/species/page",
+			            type: 'POST',
+			            data: {'curr':obj.curr,'limit':obj.limit},
+			            beforeSend:function(){
+			            	index = top.layer.msg('请求中,请稍候', {
+			                    icon: 16,
+			                    time: false,
+			                    shade: 0.8
+			                });
+			            },
+			            complete: function (XMLHttpRequest, textStatus) {
+			            	layer.close(index);
+			            },
+			            success: function (data) {
+			                if (data.status == 200 && data.data != null && data.data.length != 0) {
+			                	var trainingHtml = "";
+			                	$.each(data.data,function(i,item){
+			                		trainingHtml += "<li>";
+			                		trainingHtml += '<a href="'+getRealPath()+"/training/detail/"+item.id+'">';
+			                		trainingHtml += '<div class="video-text" style = "text-align:center;">';
+			                		trainingHtml += '<p class="fs20">'+item.danceName+'</p>';
+			                		trainingHtml += '<p class="fs12">金彦TOP SHOW</p>';
+			                		trainingHtml += '</div>';
+			                		trainingHtml += '<img src="'+getRealPath()+item.danceImg+'" alt="">';
+			                		trainingHtml += '</a>';
+			                		trainingHtml += '</li>';
+			                		
+			                	})
+			                	$("#training").html(trainingHtml);
+			                } else {
+			                	layer.msg(data.message);
+			                }
+			            },
+			            error: function () {
+			                layer.msg("出现错误,请尝试刷新页面!");
+			            }
+			        });
+				}
+			});
+		})
+		</script>
+        <!-- 页脚 footer -->
+		<div class="footer">
+           <div th:replace="commons/foot::foot"></div>
+        </div>
+        <div th:replace="commons/script::script('/static/js/index.js')"></div>
+    </body>
+</html>
