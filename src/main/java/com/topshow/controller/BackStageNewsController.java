@@ -109,6 +109,35 @@ public class BackStageNewsController {
     @RequestMapping(value = { "/upload/img" }, method = { RequestMethod.POST })
     public Map<String, Object> changeImg(HttpServletRequest request, @RequestParam("file") MultipartFile file,HttpSession session)
             throws IllegalStateException, IOException {
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    Result changeImgFunction = changeImgFunction(request,file,0);
+        map.put("code", Integer.valueOf(0));
+        map.put("msg", "上传成功!");
+        Map<String, Object> mapData = new HashMap<String, Object>();
+        String fileName = (String)changeImgFunction.getData();
+        mapData.put("src", request.getContextPath() + fileName.split(",")[0]);
+        mapData.put("title", fileName.split(",")[1]);
+        mapData.put("src_save", fileName.split(",")[0]);
+        map.put("data", mapData);
+        return map;
+    }
+	
+	@ResponseBody
+    @RequestMapping(value = { "/upload/content/img" }, method = { RequestMethod.POST })
+    public Map<String, Object> changeImgContent(HttpServletRequest request, @RequestParam("upload_file") MultipartFile file,HttpSession session)
+            throws IllegalStateException, IOException {
+        Result changeImgFunction = changeImgFunction(request,file,1);
+        Map<String, Object> map_data = new HashMap<String, Object>();
+        map_data.put("success", Boolean.valueOf(true));
+        map_data.put("msg", "上传成功!");
+        String url = (String)changeImgFunction.getData();
+        map_data.put("file_path",url.split(",")[0]);
+        map_data.put("title", url.split(",")[1]);
+        return map_data;
+    }
+	
+    public Result changeImgFunction(HttpServletRequest request, MultipartFile file,Integer url)
+            throws IllegalStateException, IOException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS");
         String rootPath = request.getServletContext().getRealPath("/admin/uploads/");
         String res = sdf.format(new Date());
@@ -118,21 +147,17 @@ public class BackStageNewsController {
         if (!newFile.getParentFile().exists()) {
             newFile.getParentFile().mkdirs();
         }
-        file.transferTo(newFile);
-        String fileUrl = "/admin/uploads/news/" + newFileName;
-
-        Map<String, Object> map = new HashMap<String, Object>();
-
-        //session.setAttribute("addTrainingTempImgLocal", fileUrl);
-        //Integer updateTeacherHeadImg = this.danceTeacherService.updateTeacherHeadImg(fileUrl, user.getId());
-        map.put("code", Integer.valueOf(0));
-        map.put("msg", "上传成功!");
-        Map<String, Object> mapData = new HashMap<String, Object>();
-        mapData.put("src", request.getContextPath() + fileUrl);
-        mapData.put("title", newFileName);
-        mapData.put("src_save", fileUrl);
-        map.put("data", mapData);
-        return map;
+        try {
+            file.transferTo(newFile);
+            if (url.intValue() == 1) {
+                String fileUrl = "/admin/uploads/news/"+newFileName;
+                return new Result(200, "上传成功!", 0, request.getScheme() + "://" + request.getServerName() + request.getContextPath() + fileUrl +"," + newFileName);
+            }
+            String fileUrl = "/admin/uploads/news/" + newFileName;
+            return new Result(200, "上传成功!", 0, fileUrl + "," + newFileName);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }

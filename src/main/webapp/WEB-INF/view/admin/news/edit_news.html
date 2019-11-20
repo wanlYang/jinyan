@@ -10,6 +10,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
 	<div th:replace="admin/commons/link::head('/admin/static/css/public.css')"></div>
+	<link rel="stylesheet" th:href="@{/admin/static/simditor/styles/simditor.css}" />
 </head>
 <body class="childrenBody">
 <form class="layui-form layui-form-pane" style="width:80%;">
@@ -19,12 +20,6 @@
 			<input type="hidden" name="id" id="id">
 			<input type="hidden" id="saveimg" name="img">
 			<input type="text" class="layui-input title" lay-verify="required" name="title" placeholder="请输入新闻标题">
-		</div>
-	</div>
-	<div class="layui-form-item layui-row layui-col-xs12">
-		<label class="layui-form-label">新闻内容</label>
-		<div class="layui-input-block">
-			<input type="text" class="layui-input content" name="content" lay-verify="required" placeholder="请输入新闻内容">
 		</div>
 	</div>
 	<div class="layui-form-item layui-row layui-col-xs12">
@@ -38,10 +33,17 @@
 		<div class="layui-input-block">
 			<div class="layui-upload-list" style="margin-top: 0;">
 				<div style="">
-					<img class="layui-upload-img cover" style="width: 500px;" id="newsImg" th:src="@{/admin/uploads/img/01460b57e4a6fa0000012e7ed75e83.jpeg}">
+					<img class="layui-upload-img cover" style="width: 199px;" id="newsImg" th:src="@{/admin/uploads/img/01460b57e4a6fa0000012e7ed75e83.jpeg}">
+					<div class="layui-btn layui-btn-sm" id="sub">点击上传</div>
 				</div>
 			</div>
-			<div class="layui-btn" id="editimg">上传简图(推荐尺寸900px*535px---小于300KB)</div>
+			<div class="layui-btn" id="editimg">选择简图(推荐尺寸900px*535px---小于300KB)</div>
+		</div>
+	</div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">编辑器</label>
+		<div class="layui-input-block">
+			<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="news_content"></textarea>
 		</div>
 	</div>
 	<div class="layui-form-item layui-row layui-col-xs12">
@@ -51,6 +53,11 @@
 		</div>
 	</div>
 </form>
+<script type="text/javascript" th:src="@{/admin/static/simditor/scripts/jquery.min.js}" ></script>
+<script type="text/javascript" th:src="@{/admin/static/simditor/scripts/module.js}" ></script>
+<script type="text/javascript" th:src="@{/admin/static/simditor/scripts/hotkeys.js}" ></script>
+<script type="text/javascript" th:src="@{/admin/static/simditor/scripts/uploader.js}" ></script>
+<script type="text/javascript" th:src="@{/admin/static/simditor/scripts/simditor.js}" ></script>
 <div th:replace="admin/commons/script::script('/admin/static/commons/news/edit_news.js')"></div>
 </body>
 </html>

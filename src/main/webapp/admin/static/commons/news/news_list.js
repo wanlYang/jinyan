@@ -61,14 +61,6 @@
 					}
 				},
 				{
-					field: 'content',
-					title: '新闻内容',
-					align: 'center',
-					templet: function(d) {
-						return d.content;
-					}
-				},
-				{
 					title: '操作',
 					templet: '#newsListBar',
 					fixed: "right",
@@ -130,7 +122,7 @@
 					var body = layui.layer.getChildFrame('body', index);
 					var iframeWindow = window[layero.find('iframe')[0]['name']];
 					body.find("#id").val(data.id);
-					body.find(".content").val(data.content);
+					body.find("#news_content").val(data.content);
 					body.find("#saveimg").val(data.img);
 					body.find(".browse_volume").val(data.browse_volume);
 					body.find(".title").val(data.title);

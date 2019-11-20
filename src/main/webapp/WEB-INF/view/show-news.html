@@ -6,6 +6,7 @@
 		<meta name="viewport"content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
 		<div th:replace="commons/link::head('')"></div>
 		<script th:src="@{/static/js/jquery.min.js}"></script>
+		<link rel="stylesheet" th:href="@{/admin/static/simditor/styles/simditor.css}" />
 	</head>
 	<body>
 		<div class="head">
@@ -37,10 +38,12 @@
                   <span class="data" th:text="${#dates.format(news.release_time,'yyyy-MM-dd HH:mm:ss')}"></span>
                   <span class="star" th:text="${news.browse_volume}"></span>
               </p>
-              <img th:src="@{${news.img}}" style="max-width:80%;margin:50px auto;display: block;" alt="">
-              <p class="show-news-con" th:text="${news.content}">
-
-              </p>
+              <div class="simditor">
+	              <img th:src="@{${news.img}}" style="max-width:80%;margin:50px auto;display: block;" alt="">
+              <div class="simditor-body" th:utext="${news.content}">
+              	
+              </div>
+              </div>
           </div>
       </div>
       <!-- 新闻推荐 -->
