@@ -3,15 +3,15 @@
 
  Source Server         : YANG
  Source Server Type    : MySQL
- Source Server Version : 50645
+ Source Server Version : 80011
  Source Host           : localhost:3306
  Source Schema         : topshow
 
  Target Server Type    : MySQL
- Target Server Version : 50645
+ Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 19/11/2019 10:35:32
+ Date: 20/11/2019 15:03:38
 */
 
 SET NAMES utf8mb4;
@@ -199,7 +199,8 @@ INSERT INTO `news` VALUES (1, '高考中考结束了！趁着暑假开始，好�
 INSERT INTO `news` VALUES (2, '我们为什么要跳舞？听听这13句最纯净的回答！', '/admin/uploads/news/20191116131137396.jpg', '2019-11-11 11:07:09', 50, '1、跳舞是表达激情和生命力的最好方式。2、舞蹈是一种肢体语言，它充满活力给人激情。3、舞蹈是一种美，而美是能够穿透人心的东西。4、舞蹈是最公平的，你必须靠自己的努力和付出。5、舞蹈真正跳得出色的，都是他人无法模仿的。6、你站在台上舞蹈，看舞蹈的人在台下看你。7、舞蹈的旅途没有完美，曲折亦是风景。8、舞蹈不是情景剧，只要努力，你也会拥有。9、舞蹈的真谛是，越跳越自信，越跳越优雅。10、旋转跳舞，可以让自己活得更精彩！11、舞蹈能够释放我们的能量，因为舞蹈时我们是快乐的。12、对于舞者来说，舞蹈是一种成长，一种收获，一种荣誉！');
 INSERT INTO `news` VALUES (4, '学舞蹈会长不高？还八字脚？？', '/admin/uploads/news/20191116131616794.jpg', '2019-11-13 11:07:09', 50, '很多时候，父母想把孩子送去学舞蹈，也没多想让孩子成为优秀的舞蹈演员，只是想让孩子练练形体气质、培养一下兴趣，多一项才艺。可是，各种可靠或者不可靠的消息却让父母们有点犹豫，比如：只有体形好的孩子才能去跳舞？学舞蹈会影响孩子长个儿，还会变“八字脚”？学舞蹈对孩子的骨骼发育不好…… 不要慌，下面就来为大家解答这些疑问~Question1、练舞蹈会让孩子长不高，有这回事吗？不会的。长个子是骨骼的事，而舞蹈练得是身体的柔韧性，拉的是韧带，两不相关。软开度的练习是为了使动作舒展，完成更多较难动作所做的基础练习，目的在于使韧带放松，关节灵活，跟是否抑制个头完全没有关系。Question2、有些父母把孩子送去学跳舞，是希望他可以借此减减肥，能达到这个效果吗？一般来说，跳舞不能达到全身减肥效果，它能达到的效果是局部减肥，比如腰腹部。所以想通过跳舞让孩子完全变瘦是不太可能的。Question3、孩子会跳出“八字脚”吗？因为芭蕾基础训练要求“开、绷、直”，所以，跳舞可以对此进行矫正。但是跳舞练出“八字脚”的情况，几乎很少会出现。Question4、学舞蹈对孩子的骨骼发育有好处吗？要选择与孩子骨骼成熟度匹配的训练强度。比如芭蕾舞，父母在决定开始足尖训练之前应该确保他们的脚和脚踝已经发育到了足够的强度。关于孩子学舞蹈特别注意：大腿特别粗的孩子不适合通过跳舞来减肥。因为在进行基础训练，特别是芭蕾基础训练的时候，力量都在腿和脚上，这会让腿部变得非常结实，从某种程度上来说，两条腿看上去会显得更粗。这就是为什么芭蕾舞演员一定要求双腿很修长的原因，这可以保证腿在长了肌肉后，看上去仍然很修长，很美。如何避免意外伤害？对老师来说，除了必须用科学的教学方法外，还要考虑到孩子的承受能力，逐步推进，让孩子做他力所能及的动作，不要过早地让孩子学一些有难度的技巧性动作。如果需要让孩子学一些有难度的动作，一定要对孩子进行一对一的辅导。孩子学舞蹈父母要怎么做父母要用鼓励、引导、奖励的方式，让孩子坚持学下去。没兴趣学不好”是针对成年人而言的，成年人成就一项学业，没兴趣就不可能学好，但孩子可不是，不能拿成人的思路套孩子。版权声明本文来源于互联网，不代表本站立场。如有侵权，请联系站长删除。');
 INSERT INTO `news` VALUES (5, '游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买', '/static/img/1503968439182918.jpg', '2019-11-08 11:07:09', 50, '肚皮舞是较为女性的舞蹈，其特色是舞者随着变化万千的快速节奏摆动臀部和腹部，舞姿优美，变化多端，而且多彰显阿拉伯风情，以神秘著称。近些年，肚皮舞也作为一种深受女士喜爱的减肥方式在世界各地广为流行。');
-INSERT INTO `news` VALUES (6, '游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买', '/static/img/1503968439182918.jpg', '2019-11-21 11:07:09', 50, '肚皮舞是较为女性的舞蹈，其特色是舞者随着变化万千的快速节奏摆动臀部和腹部，舞姿优美，变化多端，而且多彰显阿拉伯风情，以神秘著称。近些年，肚皮舞也作为一种深受女士喜爱的减肥方式在世界各地广为流行。');
+INSERT INTO `news` VALUES (6, '游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买', '/static/img/1503968439182918.jpg', '2019-11-21 11:07:09', 50, '<p style=\"text-align: center;\">肚皮舞是较为女性的舞蹈，其特色是舞者随着变化万千的快速节奏摆动臀部和腹部，舞姿优美，变化多端，而且多彰显阿拉伯风情，以神秘著称。近些年，肚皮舞也作为一种深受女士喜爱的减肥方式在世界各地广为流行。</p>');
+INSERT INTO `news` VALUES (11, 'asdfasdfasdfasdf', '/admin/uploads/news/20191120143459909.jpg', '2019-11-20 14:35:08', 23, '<h1 style=\"text-align: center;\"><b>sda fsdaf&nbsp;</b></h1><table><colgroup><col width=\"16.65278934221482%\"><col width=\"16.65278934221482%\"><col width=\"16.65278934221482%\"><col width=\"16.65278934221482%\"><col width=\"16.65278934221482%\"><col width=\"16.736053288925895%\"></colgroup><thead><tr><th><br></th><th><br></th><th>asrfrsad</th><th>sdfsadf</th><th>sadf</th><th>sadf</th></tr></thead><tbody><tr><td><br></td><td><br></td><td>dsaf</td><td><br></td><td>sadf</td><td>sadf</td></tr><tr><td><br></td><td><br></td><td>dsaf</td><td>sdfsadfs</td><td>asdfasd</td><td>fasdf</td></tr><tr><td><br></td><td><br></td><td>asdf</td><td>sdf</td><td>adfsadf</td><td>asdfas</td></tr><tr><td><br></td><td><br></td><td><br></td><td>asdfasdf</td><td><br></td><td><br></td></tr></tbody></table>');
 
 -- ----------------------------
 -- Table structure for suggestion
@@ -231,7 +232,7 @@ CREATE TABLE `video`  (
   `local` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of video
