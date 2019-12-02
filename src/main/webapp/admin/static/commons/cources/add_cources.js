@@ -84,6 +84,7 @@ layui.use(['form', 'layer','upload', 'laydate','croppers'], function() {
              setTimeout(function() {
 				top.layer.msg("添加成功！");
 				var index=parent.layer.getFrameIndex(window.name); //获取当前窗口的name
+				console.log(index)
 	            parent.layer.close(index);
 	            parent.location.reload();
 			}, 500);

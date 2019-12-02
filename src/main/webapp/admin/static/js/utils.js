@@ -1,7 +1,14 @@
 ﻿layui.use(['jquery','layer'], function () {
     var $ = layui.jquery,
     	layer = layui.layer;
+    function checkHtml(htmlStr) {
+    	var reg = /<[^>]+>/g;
+    	return reg.test(htmlStr);
+    }
     $(document).ajaxComplete(function (event, obj, settings) {
+    	if (checkHtml(obj.responseText)) {
+			return false;
+		}
         var resultCom = eval("(" + obj.responseText + ")");
         if (resultCom.status == -1001) {
         	var index = layer.open({

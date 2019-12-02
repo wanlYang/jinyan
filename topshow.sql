@@ -3,15 +3,15 @@
 
  Source Server         : YANG
  Source Server Type    : MySQL
- Source Server Version : 80011
+ Source Server Version : 50645
  Source Host           : localhost:3306
  Source Schema         : topshow
 
  Target Server Type    : MySQL
- Target Server Version : 80011
+ Target Server Version : 50645
  File Encoding         : 65001
 
- Date: 20/11/2019 15:03:38
+ Date: 22/11/2019 10:42:32
 */
 
 SET NAMES utf8mb4;
@@ -70,7 +70,7 @@ CREATE TABLE `admin_nav`  (
   PRIMARY KEY (`nav_id`) USING BTREE,
   INDEX `nav_parent_id`(`nav_parent_id`) USING BTREE,
   INDEX `nav_role`(`nav_role`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of admin_nav
@@ -85,6 +85,7 @@ INSERT INTO `admin_nav` VALUES (27, 1, '视频管理', 'video/list', 'video', NU
 INSERT INTO `admin_nav` VALUES (28, 1, '课程管理', 'cources/list', 'cources', NULL, 'layui-icon layui-icon-app', 0, '1,3');
 INSERT INTO `admin_nav` VALUES (29, 6, '留言管理', 'suggestion/list', 'suggestion', NULL, 'icon-icon10', 0, '1,3');
 INSERT INTO `admin_nav` VALUES (30, 6, '新闻管理', 'news/list', 'news', NULL, 'icon-mokuai', 0, '1,3');
+INSERT INTO `admin_nav` VALUES (31, 6, '动态课程表', 'cources/table/list', 'table_add', NULL, 'icon-mokuai', 0, '1,3');
 
 -- ----------------------------
 -- Table structure for banner
@@ -190,7 +191,7 @@ CREATE TABLE `news`  (
   `browse_volume` int(11) NULL DEFAULT NULL COMMENT '浏览量',
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '内容',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of news
@@ -201,6 +202,21 @@ INSERT INTO `news` VALUES (4, '学舞蹈会长不高？还八字脚？？', '/ad
 INSERT INTO `news` VALUES (5, '游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买', '/static/img/1503968439182918.jpg', '2019-11-08 11:07:09', 50, '肚皮舞是较为女性的舞蹈，其特色是舞者随着变化万千的快速节奏摆动臀部和腹部，舞姿优美，变化多端，而且多彰显阿拉伯风情，以神秘著称。近些年，肚皮舞也作为一种深受女士喜爱的减肥方式在世界各地广为流行。');
 INSERT INTO `news` VALUES (6, '游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买游戏手机都不值得买', '/static/img/1503968439182918.jpg', '2019-11-21 11:07:09', 50, '<p style=\"text-align: center;\">肚皮舞是较为女性的舞蹈，其特色是舞者随着变化万千的快速节奏摆动臀部和腹部，舞姿优美，变化多端，而且多彰显阿拉伯风情，以神秘著称。近些年，肚皮舞也作为一种深受女士喜爱的减肥方式在世界各地广为流行。</p>');
 INSERT INTO `news` VALUES (11, 'asdfasdfasdfasdf', '/admin/uploads/news/20191120143459909.jpg', '2019-11-20 14:35:08', 23, '<h1 style=\"text-align: center;\"><b>sda fsdaf&nbsp;</b></h1><table><colgroup><col width=\"16.65278934221482%\"><col width=\"16.65278934221482%\"><col width=\"16.65278934221482%\"><col width=\"16.65278934221482%\"><col width=\"16.65278934221482%\"><col width=\"16.736053288925895%\"></colgroup><thead><tr><th><br></th><th><br></th><th>asrfrsad</th><th>sdfsadf</th><th>sadf</th><th>sadf</th></tr></thead><tbody><tr><td><br></td><td><br></td><td>dsaf</td><td><br></td><td>sadf</td><td>sadf</td></tr><tr><td><br></td><td><br></td><td>dsaf</td><td>sdfsadfs</td><td>asdfasd</td><td>fasdf</td></tr><tr><td><br></td><td><br></td><td>asdf</td><td>sdf</td><td>adfsadf</td><td>asdfas</td></tr><tr><td><br></td><td><br></td><td><br></td><td>asdfasdf</td><td><br></td><td><br></td></tr></tbody></table>');
+
+-- ----------------------------
+-- Table structure for storefront
+-- ----------------------------
+DROP TABLE IF EXISTS `storefront`;
+CREATE TABLE `storefront`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '店面ID',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '店面名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of storefront
+-- ----------------------------
+INSERT INTO `storefront` VALUES ('10132947561574263774261', '东郊店(金花路店)');
 
 -- ----------------------------
 -- Table structure for suggestion
@@ -223,6 +239,81 @@ INSERT INTO `suggestion` VALUES (3, 'aaa', '17600302409', '奥术大师多');
 INSERT INTO `suggestion` VALUES (4, 'adminsein', '17600302409', '奥术大师大所');
 
 -- ----------------------------
+-- Table structure for table_cources
+-- ----------------------------
+DROP TABLE IF EXISTS `table_cources`;
+CREATE TABLE `table_cources`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '课程名称',
+  `star_class` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '课程星级',
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '舞蹈类型',
+  `effect` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '舞蹈作用，介绍',
+  `start_time` time(0) NULL DEFAULT NULL COMMENT '课程开始时间',
+  `end_time` time(0) NULL DEFAULT NULL COMMENT '结束时间',
+  `week` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '星期ID',
+  `storefront` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '店面ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `week`(`week`) USING BTREE,
+  INDEX `table_ course_ibfk_2`(`storefront`) USING BTREE,
+  CONSTRAINT `table_cources_ibfk_2` FOREIGN KEY (`storefront`) REFERENCES `storefront` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `table_cources_ibfk_3` FOREIGN KEY (`week`) REFERENCES `week` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of table_cources
+-- ----------------------------
+INSERT INTO `table_cources` VALUES ('10246853791574333684832', 'admin', '4', '成品舞', '悬链肌肉', '09:00:00', '13:00:00', '71046358971574247275310', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('10867214951574338274151', 'adminsa', '3', '成品舞', '悬链肌肉', '15:00:00', '16:00:00', '67341681051574247226155', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('10968142371574337048524', 'admin按', '3', '成品舞', '悬链肌肉', '14:00:00', '14:30:00', '11976352101574247112256', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('10986721351574335568211', 'admin', '4', '成品舞', '悬链肌肉', '10:00:00', '13:00:00', '51065329141574247214318', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('12683510741574335427306', 'admin', '3', '成品舞', '悬链肌肉', '11:00:00', '14:00:00', '39657101421574247168608', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('13104582761574338868269', 'admin', '4', '成品舞', '悬链肌肉', '13:00:00', '14:00:00', '51065329141574247214318', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('1623758491574342465428', '肚皮舞HJ', '3', '成品舞', '悬链肌肉', '13:00:00', '16:00:00', '71046358971574247275310', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('19726310841574333388582', 'admin', '4', '成品舞', '悬链肌肉', '17:00:00', '18:00:00', '21964327101574247282899', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('23954110871574329507005', '肚皮舞', '3', '成品舞', '悬链肌肉', '10:00:00', '12:00:00', '39657101421574247168608', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('25678911031574335949910', 'admin', '3', '成品舞', '悬链肌肉', '10:00:00', '12:00:00', '21964327101574247282899', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('25938104671574336305414', 'admin', '4', '成品舞', '悬链肌肉', '13:00:00', '16:00:00', '51065329141574247214318', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('27108915631574332258819', '肚皮舞', '3', '成品舞', '悬链肌肉', '09:00:00', '11:00:00', '67341681051574247226155', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('29311048751574336517696', 'admin', '4', '成品舞', '悬链肌肉', '13:00:00', '14:00:00', '71046358971574247275310', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('36184210951574333718680', 'admin', '3', '成品舞', '悬链肌肉', '16:00:00', '20:00:00', '39657101421574247168608', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('39108671251574335893249', 'admin', '3', '成品舞', '悬链肌肉', '13:00:00', '14:00:00', '39657101421574247168608', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('39410157861574333510560', 'admin', '4', '成品舞', '悬链肌肉', '11:00:00', '18:00:00', '51065329141574247214318', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('41037195261574332729168', 'adminxi', '2', '成品舞', '悬链肌肉', '14:00:00', '16:00:00', '11976352101574247112256', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('41759361081574333612834', 'admin', '4', '成品舞', '悬链肌肉', '15:00:00', '17:00:00', '67341681051574247226155', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('42975361081574336773594', 'admin', '4', '成品舞', '悬链肌肉', '11:00:00', '22:00:00', '47196108431574247199561', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('47815321091574336730098', 'admin', '1', '成品舞', '悬链肌肉', '10:00:00', '13:00:00', '47196108431574247199561', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('47910651231574336235317', 'admin', '3', '成品舞', '悬链肌肉', '10:00:00', '11:00:00', '39657101421574247168608', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('54862109371574334890756', 'admin', '3', '成品舞', '悬链肌肉', '10:00:00', '12:00:00', '71046358971574247275310', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('57860910931565797075245', '阿斯顿', '4', '水电费', '梵蒂冈', '13:18:26', '13:18:28', '39657101421574247168608', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('57860910931574297075245', 'asfda', '5', '打算', '发过火', '13:17:07', '13:17:09', '47196108431574247199561', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('57860910934574297075245', '阿斯顿法', '4', '发过火', '即可', '13:18:00', '13:18:02', '51065329141574247214318', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('57861210931574297075245', '啊发顺丰', '2', '按时', '国防生的', '13:15:12', '13:15:14', '11976352101574247112256', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('57861210931574297075286', '奥术大师', '1', '阿打算', '阿女方', '10:34:05', '10:34:07', '21964327101574247282899', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('57861210931574297075287', '相持不下', '1', '水电费', '胜多负少', '04:00:00', '13:00:00', '21964327101574247282899', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('57861210931574297075845', '阿斯顿发', '5', '阿达', '似懂非懂', '13:16:05', '13:16:08', '71046358971574247275310', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('57861210931574297089245', '阿斯VB', '5', '规划局', '4儿童', '13:16:39', '13:16:41', '67341681051574247226155', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('5826749311574316771996', '肚皮舞', '4', '成品舞', '悬链肌肉', '12:30:00', '14:00:00', '11976352101574247112256', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('5826914371574333944985', 'admin', '1', '成品舞', '悬链肌肉', '12:00:00', '13:00:00', '67341681051574247226155', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('61104982751574316960765', '肚皮舞', '5', '成品舞', '悬链肌肉', '10:00:00', '11:00:00', '47196108431574247199561', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('61472810531574338310833', 'admin', '4', '成品舞', '悬链肌肉', '16:00:00', '17:00:00', '67341681051574247226155', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('61537984101574338767801', 'adminv', '4', '成品舞', '悬链肌肉', '16:00:00', '17:00:00', '51065329141574247214318', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('62531041981574338916459', 'admin', '1', '成品舞', '悬链肌肉', '16:00:00', '17:00:00', '51065329141574247214318', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('65210793841574337457349', 'admin', '4', '成品舞', '悬链肌肉', '15:00:00', '21:00:00', '11976352101574247112256', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('69210485731574340027598', '肚皮舞', '3', '成品舞', '悬链肌肉', '13:00:00', '14:00:00', '39657101421574247168608', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('71362108451574335990140', 'admin', '3', '成品舞', '悬链肌肉', '10:00:00', '14:00:00', '67341681051574247226155', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('76510891341574335302028', 'admin', '3', '成品舞', '悬链肌肉', '12:00:00', '13:00:00', '21964327101574247282899', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('79103281641574338991264', 'admin', '3', '成品舞', '悬链肌肉', '19:00:00', '20:00:00', '51065329141574247214318', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('81279653101574333907422', 'admin', '3', '成品舞', '悬链肌肉', '12:00:00', '15:00:00', '21964327101574247282899', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('82159103461574337407802', 'admin', '3', '成品舞', '悬链肌肉', '15:00:00', '16:00:00', '11976352101574247112256', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('83126457101574332063141', '肚皮舞', '3', '成品舞', '悬链肌肉', '11:00:00', '14:00:00', '47196108431574247199561', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('86135109721574336829073', '肚皮舞s', '3', '成品舞', '悬链肌肉', '10:00:00', '20:00:00', '71046358971574247275310', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('91042176831574333832404', 'admin', '4', '成品舞', '悬链肌肉', '16:00:00', '17:00:00', '47196108431574247199561', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('91673104821574332568010', '肚皮舞', '3', '成品舞', '悬链肌肉', '13:00:00', '14:00:00', '71046358971574247275310', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('93548210161574316807981', '肚皮舞', '5', '成品舞', '悬链肌肉', '14:00:00', '15:00:00', '39657101421574247168608', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('95724106381574337518295', 'admin', '4', '成品舞', '悬链肌肉', '13:00:00', '16:00:00', '21964327101574247282899', '10132947561574263774261');
+INSERT INTO `table_cources` VALUES ('98141073651574335515121', 'admin', '3', '成品舞', '悬链肌肉', '12:00:00', '13:00:00', '47196108431574247199561', '10132947561574263774261');
+
+-- ----------------------------
 -- Table structure for video
 -- ----------------------------
 DROP TABLE IF EXISTS `video`;
@@ -240,5 +331,27 @@ CREATE TABLE `video`  (
 INSERT INTO `video` VALUES (1, 'http://cdn.gv-photo.com/uploads/2018/09/231700569664.gif', 'http://aa.jinyanwudao.com/czy.mp4', '蔡泽元小会员携手教练同台演绎爵士风采');
 INSERT INTO `video` VALUES (2, 'http://cdn.gv-photo.com/uploads/2018/09/231700569664.gif', 'http://aa.jinyanwudao.com/shaoerlading.mp4', '学员花朵-少儿拉丁舞 MP4');
 INSERT INTO `video` VALUES (4, 'http://cdn.gv-photo.com/uploads/2018/09/231700569664.gif', 'http://aa.jinyanwudao.com/lddp.mp4', '金彦兰岛肚皮舞课程展示');
+
+-- ----------------------------
+-- Table structure for week
+-- ----------------------------
+DROP TABLE IF EXISTS `week`;
+CREATE TABLE `week`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '星期ID',
+  `describe` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `english` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '英文',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of week
+-- ----------------------------
+INSERT INTO `week` VALUES ('11976352101574247112256', '星期一', 'monday');
+INSERT INTO `week` VALUES ('21964327101574247282899', '星期二', 'tuesday');
+INSERT INTO `week` VALUES ('39657101421574247168608', '星期三', 'wednesday');
+INSERT INTO `week` VALUES ('47196108431574247199561', '星期四', 'thursday');
+INSERT INTO `week` VALUES ('51065329141574247214318', '星期五', 'friday');
+INSERT INTO `week` VALUES ('67341681051574247226155', '星期六', 'saturday');
+INSERT INTO `week` VALUES ('71046358971574247275310', '星期天', 'sunday');
 
 SET FOREIGN_KEY_CHECKS = 1;

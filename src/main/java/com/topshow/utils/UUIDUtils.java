@@ -29,7 +29,7 @@ public class UUIDUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(generateNumberUUID("DANCE_TRAINING_ID"));
+        System.out.println(generateNumberUUID(""));
     }
 
     public static String generateUID() {
@@ -72,7 +72,6 @@ public class UUIDUtils {
             String wanl = "DANCETRAINING";
             return wanl = wanl + no;
         }
-        String wanl = "ac";
-        return wanl = wanl + no;
+        return no + "" +System.currentTimeMillis();
     }
 }

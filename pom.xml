@@ -284,5 +284,21 @@
 		</plugin>
 	</plugins>
 		<finalName>jinyan</finalName>
+		<resources>
+			<!-- mapper.xml文件在java目录下 -->
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 </project>

@@ -81,7 +81,7 @@ public class BackStageCourcesController {
             newFile.getParentFile().mkdirs();
         }
         file.transferTo(newFile);
-        String fileUrl = "/admin/uploads/cources" + newFileName;
+        String fileUrl = "/admin/uploads/cources/" + newFileName;
 
         Map<String, Object> map = new HashMap<String, Object>();
         Cources cources = new Cources();

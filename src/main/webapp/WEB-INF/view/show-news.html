@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:if="${news != null}">
 	<head>
 		<meta charset="UTF-8">
@@ -7,6 +7,12 @@
 		<div th:replace="commons/link::head('')"></div>
 		<script th:src="@{/static/js/jquery.min.js}"></script>
 		<link rel="stylesheet" th:href="@{/admin/static/simditor/styles/simditor.css}" />
+		<style>
+		
+			simditor p img,img{
+				width:98%;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="head">
